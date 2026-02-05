@@ -11,7 +11,7 @@ export default function ProductCard({
   isBestSeller,
   isWishlisted,
   onAddToCart,
-  onToggleWishlist
+  onToggleWishlist,
 }) {
   return (
     <div className="product-card">
@@ -22,7 +22,7 @@ export default function ProductCard({
         className={`wishlisted ${isWishlisted ? "active" : ""}`}
         onClick={onToggleWishlist}
       >
-        {isWishlisted ? "❤️" : "🩶"}
+        {isWishlisted ? "❤️" : "🤍"}
       </button>
 
       {/* Product Image */}
