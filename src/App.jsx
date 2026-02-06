@@ -12,24 +12,49 @@ function App() {
   const [cartItems, setCartItems] = useState(() => {
     const savedCart = localStorage.getItem("techstore-cart");
 
-    if (savedCart) {
-      //true
-      try {
-        return JSON.parse(savedCart);
-      } catch (error) {
-        console.error("Problem!!!", error);
-        return [];
-      }
+    if(savedCart)//true
+    {
+      try{
+      return JSON.parse(savedCart); //errors might happen in json
     }
+    catch(error)
+    {
+      console.error("Problem!!!",error);
+      return[];
+    }
+  }
+    else
+    {
+      return [];
+    }
+    });
+    
+
+useEffect(()=>{
+  localStorage.setItem("techstore-cart",JSON.stringify(cartItems));
+},[cartItems])
+
+
+ // Wishlist - array of product IDs that are wishlisted
+const [wishlist, setWishlist] = useState(() => {
+  const savedWishlist = localStorage.getItem("techstore-wishlist");
+
+  if (savedWishlist) {
+    try {
+      return JSON.parse(savedWishlist);
+    } catch (error) {
+      console.error("Wishlist load error", error);
+      return [];
+    }
+  } else {
     return [];
-  });
+  }
+});
 
-  useEffect(() => {
-    localStorage.setItem("techstore-cart", JSON.stringify(cartItems));
-  }, [cartItems]);
+useEffect(() => {
+  localStorage.setItem("techstore-wishlist", JSON.stringify(wishlist));
+}, [wishlist]);
 
-  // Wishlist - array of product IDs that are wishlisted
-  const [wishlist, setWishlist] = useState([]);
 
   // Search - what user types in search box
   const [searchTerm, setSearchTerm] = useState("");
